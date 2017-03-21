@@ -1,0 +1,465 @@
+\documentclass{tufte-book}
+
+\usepackage{amsmath, amsthm}
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Math Camp 2016\\Exercises }
+\author{Joe Seidel}
+\date{\today}
+
+\usepackage{booktabs}
+\usepackage{units}
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+\usepackage{multicol}
+\usepackage{lipsum}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{amssymb}
+
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\DeclareMathOperator{\proj}{proj}
+\newcommand{\vct}{\mathbf}
+\newcommand{\dprod}[2]{\langle \vct{#1}, \vct{#2} \rangle}
+
+\newtheoremstyle{mytheoremstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\itshape}		% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mytheoremstyle}
+\newtheorem*{thm}{Thm.}
+
+\newtheoremstyle{mylemstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\itshape}		% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mylemstyle}
+\newtheorem*{lem}{Lem.}
+
+
+\newtheoremstyle{mydefstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\normalfont}	% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mydefstyle}
+\newtheorem*{mydef}{Def.}
+\newtheorem*{ex}{E.g.}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{gobble}
+\newpage
+\pagenumbering{arabic}
+
+\subsection{Exercise 1.1}
+Prove that
+\[ \| \vct{x} +\vct{y} \|^2 + \|\vct{x}-\vct{y}\|^2 = 2\|\vct{x}\|^2 + 2\|\vct{y}\|^2 \]
+if $\vct{x} \in R^k$ and $\vct{y} \in R^k$.
+
+\begin{proof}\marginnote{\it{norm}: $\|x\| = (\dprod{x}{x})^{\frac{1}{2}}$}
+\begin{align*}
+\| \vct{x} +\vct{y} \|^2 + \|\vct{x}-\vct{y}\|^2 &=  \dprod{x+y}{x+y} + \dprod{x-y}{x-y} \\
+&= \sum_1^k(x_i+y_i)^2 + \sum_1^k(x_i - y_i)^2\\
+&= \sum_1^k x_i^2 + \sum_1^k 2x_iy_i + \sum_1^k y_i^2 + \sum_1^k x_i^2 - \sum_1^k 2x_iy_i + \sum_1^k y_i^2 \\
+&=  2\sum_1^k x_i^2 + 2\sum_1^k y_i^2\\
+&= 2\dprod{x}{x} + 2\dprod{y}{y}\\
+&= 2\|\vct{x}\|^2 + 2\|\vct{y}\|^2\\
+\end{align*}
+
+Consider parrallegram formed by $\vct{x}$ and $\vct{y}$ in $\mathbb{R^2}$. The sum of the length of the sides, squared will be equal to the sum of the diagonals squared.
+
+\end{proof}
+
+\subsection{Exercise 1.2}
+For $x \in \mathbf{R}^1$ and $y \in mathbf{R}^1$, determine whether each is a metric.
+
+\begin{enumerate}
+\item $d_1(x,y) = (x-y)^2$ \\
+Fails subadditivity.  Consider when
+$x=4$, $y=-1$, $z=2$.
+\[ d(4,-1) = 25 > 15 = d(4,2) + d(2,-1) \]
+
+\item $d_2(x,y) = \sqrt{|x-y|}$
+This fails non-negativity.  Suppose, $x=12$ and $y = 3$.
+
+\[ d(12,3) = \sqrt{|12-3|} = \pm 3 \]
+
+For subadditivity, first observe
+
+\begin{align}
+|x - y| &= |x - y + z - z|\\
+&= |x - z + z - x| \\
+&\leq |x - z| + |z - x|\\
+&\leq |x - z| + |z - x| + 2\sqrt{|x-z|}\sqrt{|z-y|}\\
+&= (\sqrt{|x-z|} + \sqrt{|z-y|})^2
+\end{align}
+
+Taking the square root of the resulting inequality
+\[ \sqrt{|x-y|} \leq \sqrt{|x-z|} + \sqrt{|z-y|} \]
+
+Line 4, is not neccessarily true.
+
+\item $d_3(x,y) = |x^2 - y^2|$
+
+It is obvious this definition satisifies nonnegativity and symmetry.
+
+For subbadditivity, observe
+\begin{align*}
+|x^2 - y^2| &= |x^2 - z^2 + z^2 - y^2| \\
+&\leq |x^2 - z^2| + |z^2 - y^2|
+\end{align*}
+
+Hence $d(x,y) \leq d(x,z) + d(z,y)$
+
+\end{enumerate}
+
+\subsection{Exercise 3}
+Consider the following subset of $\mathbb{R}^2$ and discuss the closedness, openes, and boundedness of each.
+
+\begin{enumerate}
+
+\item $E = \mathbb{N}$ The set of all integers.
+
+Closedness:  from (b), the set has no limit points.  Hence, every limit point is contained in E.  Therefore it it is closed.
+
+Openness: E has no interior points, hence E is not open. $\exists x \in E$ such that $x$ is not an interior point.
+
+Boundedess:  For $\forall x \in N$ there exists $y$ such that $x<y$.  (Archmedian principle).  Unbounded.
+
+\item $E = \{\frac{1}{n} \ | \ n \in \mathbb{N}^+ \}$
+
+\textit{Closedness}: $0$ is an accumulation point of $E$, but $0 \notin E$ therefore $E$ is not closed.
+
+\textit{Openness}: $\forall x \in E$, $\exists r > 0$ such that $N_r(x) \not\subset E$ by the properaty for $\mathbb{Q}$ is dense in $\mathbb{R}$.  Hence $E$ has no interior points and is not open.
+
+\textit{boundedness}:   $E$ is bounded.  Choose $M=2$, observe $\forall x \in E$, $d(x, (0,0)) < M$.
+
+\item $E= \mathbb{R}^2$
+This set is open, closed and unbounded.  The first two easily follow from (d) and (f).  For boundedness, observe that given any $M$ such that $d(x, p) < M$ for $x \in E$ there exists a $p \in \mathbb{R}^2$ such that $d(x,p) > M$, using the standard metric.  However, in the discrete metric this would be bounded.
+\end{enumerate}
+
+\subsection{Exercise 4}
+Determine whether each of the following sets is compact.
+
+\begin{enumerate}
+
+\item $[0,1]$\\
+Closed and bounded, hence compact
+
+\item $[0,1)$
+Observe that $1$ is a limit point of the set.  The set is not closed, so not compact.  Also, let $B_n = (0, \frac{1}{n})$ for $n \in \mathbb{N}^+$  Observe that the the open cover of the set, $\{0\} \cup \bigcup_n^{\infty} B_n$ has no finite subcover.
+
+\item $E = \{ 1, 2, 3\}$
+Compact.   The set is closed and bounded.
+
+\item $E = \{ \frac{1}{n} \ | \ n=1,2,3... \}$
+Observer the $0$ is a limit point of $E$, but $0 \notin E$ so $E$ is not closed. Therefore, not compact.
+
+\item $E = \{ \frac{1}{n} \ | \ n=1,2,3... \} \cup \{0\}$  Closed and bounded, therefore compact.
+
+\subsection{Exercise 5}
+Calculate $\lim_{n \to \infty}(\sqrt{n^2+n}-n)$
+
+First note
+\begin{align*}
+\sqrt{n^2+n}-n &= \sqrt{n^2+n}-n \frac{\sqrt{n^2+n}+n}{\sqrt{n^2+n}+n}\\
+&=\frac{n}{\sqrt{n^2+n}+n}\\
+&= \frac{1}{\sqrt{1 + \frac{1}{n}} + 1}\\
+\end{align*}
+
+Next, observe
+\[ \lim_{n \to \infty} \frac{1}{n} = 0 \]
+
+Therefore
+\[\lim_{n \to \infty}(\sqrt{n^2+n}-n) = \frac{1}{2} \]
+
+\end{enumerate}
+
+\subsection{Exercise 6}
+Given
+\[ x_n = 1 + \frac{1}{2^2} + ... + \frac{1}{n^2} \]
+
+prove the sequence $\{x_n\}$ converges.
+
+\begin{proof}
+
+Choose any $\epsilon > 0$. Then given sufficiently large $N \in \mathbb{N}$
+\[ d(x_n, x_{n+1}) = \frac{1}{(n+1)^2} < \epsilon \]
+where $n \geq N$.  Hence the sequence is Cauchy and, equivalently, convergent.
+
+\end{proof}
+
+\subsection{Exercise 7}
+If $s_1 = \sqrt{2}$ and $s_{n+1} = \sqrt{2 + s_n}$ for $n=1,2,3...$ prove that $\{s_n\}$ converges, and and that $s_n < 2$ for $n=1,2,3...$.
+
+First, prove monotonicity using induction, i.e. $s_n < s_{n+1}$.
+Setting $n=1$
+\[ s_1 = \sqrt{2} < \sqrt{2 + \sqrt{2}} = s_2 \]
+as required.
+
+Let $n$ be an arbitrary natural number and suppose that $s_n < s_{n+1}$.  Then
+\begin{align*}
+s_{n+1} = \sqrt{2 + s_n} < \sqrt{2 + s_{n+1}} = s_{n+2}
+\end{align*}
+
+Since both the base case and the inductive have been performed, through mathematical induction, $s_n < s_{n+1}$ holds for all natural numbers.
+
+Therefore, $\{s_n\}$ is monotonic.
+
+Next show that $\{s_n\}$ is bounded.  We are given that it is bounded below by $\sqrt{2}$. Using induction, show that $s_n < 2$ for $n=1,2,3,...$.  Setting $n=1$
+
+\[ s_1 = \sqrt{2} < 2 \]
+
+Let $n$ be arbitrary and suppose $s_n < 2$.  Then
+
+\begin{align*}
+s_{n+1} &= \sqrt{2 + s_n}\\
+&< \sqrt{2 + 2}\\
+&=2
+\end{align*}
+
+Since both the base case and the inductive have been performed, through mathematical induction, $s_n < 2$ holds for all natural numbers.
+
+Hence, $\{s_n\}$ is bounded above by $2$ and converges.
+
+\subsection{Exercise 8}
+Find the upper and lower limits of the sequence $\{s_n\}$ defined by
+\[ s_n = \frac{(-1)^n}{1+\frac{1}{n}} \]
+
+Observe that the odd numbered indexed sequences are negative and approach $-1$ while the even number indexed sequences are even and approach $1$. Hence
+
+\[ \limsup s_n = 1 \text{ and } \liminf s_n = -1 \]
+
+\subsection{Exercise 9}
+Calculate
+\[ \sum_{n=0}^{\infty}(n+1)x^n \text{ for } 0 \leq x < 1 \]
+
+We need to find a general formula of $S_n = \sum_{n=0}^{\infty}(n+1)x^n$.  It will be usefull to recall the gemotric series
+
+\[ \sum_{i=0}^{n} r^i = \frac{1-r^{n+1}}{1-r} \text{ for } (-1 < r < 1) \]
+and
+\[ \sum_{i=0}^{\infty} r^i = \frac{1}{1-r} \]
+
+Calculating for $S_n$
+\begin{align}
+\sum_{n=0}^{\infty}(n+1)x^n &= 1 + 2x + 3x^2 + ...\\
+&= 1 + x + x^2 ... + x(1 + x + x^2...) + x^2(1 + x + x^3...) +...\\
+&= (1 + x + x^2 + ...)^2 \\
+&= (\sum_{i=0}^{\infty} x^i)^2\\
+&= \frac{1}{(1-x)^2}
+\end{align}
+
+It is important to note that step (8) to (9) works because we are given $0 \leq x < 1$.
+
+
+\subsection{Exercise 10}
+
+Let $x_n = \sum_{k=0}^n \frac{1}{n!}$.  Prove that $\{x_n\}$.  Converges.
+
+Observe that
+\[ \frac{1}{n!} \leq \frac{1}{n(n-1)} \text{ for } n = 2, 3,4,5... \]
+
+Which means
+
+\begin{align*}
+\sum_{k=2}^n \frac{1}{n!} &= \frac{1}{2!} + ... + \frac{1}{n!}\\
+&\leq \frac{1}{2} + ... + \frac{1}{n(n-1)} \\
+&= \sum_{k=2}^n \frac{1}{k(k-1)} \\
+&= 1 - \frac{1}{n}\\
+&< 1
+\end{align*}
+
+Since $\sum_{k=0}^1 \frac{1}{n!} = 2$ we can conlude that
+\[ \sum_{k=0}^n \frac{1}{n!} < 3 \]
+
+Hence $\{x_n\}$ is bounded and monotonic sequence and therefore converges.
+
+\subsection{Exercise 11}
+Determine if the series $\sum a_n$ is convergent or divergent where
+\[ a_n = \frac{\sqrt{n+1} - \sqrt{n}}{n} \]
+First observe
+\begin{align*}
+a_n &= \frac{\sqrt{n+1} - \sqrt{n}}{n} \cdot \frac{\sqrt{n+1} + \sqrt{n}}{\sqrt{n+1} + \sqrt{n}}\\
+&= \frac{1}{n(\sqrt{n+1} + \sqrt{n})}\\
+\end{align*}
+
+It's helpful to know the sequence \marginnote{For proof of this, see Week2 notes from Math 203}
+\[ \sum_{n=1}^{\infty} \frac{1}{n^p} \]
+converge when $p > 1$.
+
+By the comparison test
+
+\[ \frac{1}{n(\sqrt{n+1} + \sqrt{n})} = < \frac{1}{n^{3/2}} \]
+
+The sequence converges.
+
+\subsection{Exercise 12}
+
+Determine whether the series $\sum a_n$ is convergent or divergent, where
+
+\[ a_n = (\sqrt[n]{n} - 1)^n .\]
+
+Using the ratio test
+
+\begin{align*}
+\alpha &= \limsup_{n \to \infty} \sqrt[n]{|a_n|} \\
+&= \limsup_{n \to \infty} \sqrt[n]{n} - 1\\
+\end{align*}
+
+A useful side note,
+\begin{align*}
+n^{\frac{1}{\log n}} &= x \\
+\frac{1}{\log n} \log n &= \log x\\
+1 &= \log x\\
+x &= e
+\end{align*}
+
+Which we can employ in calculating
+\begin{align*}
+\alpha &= \limsup_{n \to \infty} \sqrt[n]{n} - 1\\
+&= \limsup_{n \to \infty} (e^{\frac{\log n}{n}}) - 1\\
+&= \exp\big(\limsup_{n \to \infty} \frac{\log n}{n} \big) - 1 \\
+&= 0
+\end{align*}
+
+Since $\alpha = 0 < 1$, the root test allows us to conlude that the series converges.
+
+\subsection{Exercise 13}
+Determine whether the series $\sum a_n$ converges or diverges, where
+\[ a_n = \frac{(-10)^n}{4^{2n+1}(n+1)} \]
+
+Using the ratio test, $L = \lim_{n \to \infty} \big| \frac{a_{n+1}}{a_n} \big|$.
+
+Compute
+
+\[ \frac{a_{n+1}}{a_n} = \frac{(-10)(n+1)}{16(n+2)} \]
+
+\[  \lim_{n \to \infty} \big| \frac{(-10)(n+1)}{16(n+2)} \big| = \frac{10}{16} \]
+
+Since $L=\frac{10}{16} < 1$ the series converges.
+
+\subsection{Exercise 14}
+Show that the limit does not exist:
+\[ \lim_{x \to 0} \sin\big(\frac{1}{x}\big) \]
+
+Consider the sequences $\{x_n\} = \frac{1}{\pi n}$ and $\{y_n\} = \frac{1}{\frac{\pi}{2}+2\pi n}$.
+
+\[ \lim_{n \to \infty} x_n = 0 \text{ and } \lim_{n \to \infty} y_n = 0 \]
+
+However,
+
+\[ \lim_{x \to 0} \sin\big(\frac{1}{x_n}\big) = 0 \text{ and } \lim_{x \to 0} \sin\big(\frac{1}{y_n}\big) = 1   \]
+
+therefore the limit does not exist.
+
+\subsection{Exercise 15}
+Compute
+\[ \lim_{x \to 0} \frac{ \sqrt{1+x} - \sqrt{1-x} }{x} \]
+
+Observe
+\begin{align*}
+\frac{ \sqrt{1+x} - \sqrt{1-x} }{x} &= \frac{ \sqrt{1+x} - \sqrt{1-x} }{x} \cdot \frac{\sqrt{1+x} + \sqrt{1-x} }{\sqrt{1+x} + \sqrt{1-x} }\\
+&= \frac{2x}{x(\sqrt{x+1} + \sqrt{1-x}) }\\
+&= \frac{2}{\sqrt{x+1} + \sqrt{1-x}}\\
+\end{align*}
+
+Hence,
+\[ \lim_{x \to 0} \frac{2}{\sqrt{x+1} + \sqrt{1-x}} = 1 \]
+
+\subsection{Exercise 18}
+Suppose \marginnote{Exercises 16 and 17 don't appear in the notes I am following} that $f(x)$ is continuous on $[a,b]$.  Let
+\[ \eta = \frac{1}{3} [f(x_1) + f(x_2) + f(x_3)] \]
+
+where $x_1, x_2, x_3 \in [a,b]$.  Prove that there exists $c \in [a,b]$ such that $f(c) = \eta$.
+
+Notice that $f$ is a continous mapping of over the closed interval $[a,b]$, then $f$ attains it's min and maximum values.  Let $f(d) = m$ and $f(c) = M$, the min and max values of the functions.  Hence, $f(d) \leq f(x) \leq f(c)$ for all $x \in [a,b]$.
+
+Let $x_1 \neq x_2 \neq x_3$, observe
+\[ f(c) = \frac{1}{3}[ f(c) + f(c) + f(c) ] < \frac{1}{3}[ f(x_1) + f(x_2) + f(x_3)] \]
+and
+\[ f(d) = \frac{1}{3}[ f(d) + f(d) + f(d) ] > \frac{1}{3}[ f(x_1) + f(x_2) + f(x_3)]. \]
+
+Since $f(c) < \eta < f(d)$, by the Intermediate Value Theorem, there exists $c \in [a,b]$ such that $f(c) = \eta$.
+
+\subsection{Exercise 19}
+For $x,y \in \mathbb{R}$, define
+\[ d'(x,y) = \frac{|x-y|}{1+|x-y|}. \]
+
+Determine whether it is a metric or not.
+
+Non-negativity and symmetry are obvious. For subadditivity, let $d(x,y)=|x-y|$, observe
+\begin{align*}
+d'(x,z) + d'(z,y) &= \frac{d(x,z)}{1+d(x,z)} + \frac{d(z,y)}{1+d(z,y)}\\
+&\geq \frac{d(x,z)}{1+d(x,z) + d(z,y)} + \frac{d(z,y)}{1+d(x,z)+d(z,y)}\\
+&= \frac{d(x,z) + d(z,y)}{1+d(x,z) + d(z,y)}\\
+&= 1 - \frac{1}{1+d(x,z) + d(z,y)}\\
+&\geq 1 - \frac{1}{1+d(x,y)}\\
+&= \frac{d(x,y)}{1+d(x,y)}\\
+&= d'(x,y)\\
+\end{align*}
+
+Therefore, $d'(x,y)$ is a metric.
+
+\subsection{Exercise 20}
+Let X be an infinite set.  For $p,q \in X$, define
+
+\[ d(p,q) =
+\begin{cases}
+1, & \text{ if } p \neq q \\
+0, & \text{ if } p=q\\
+\end{cases}
+\]
+
+Prove that this is a metric. Which subsets of the resulting metric space are open?  Which are closed?  Which are compact?
+
+Non-negativity and symmetry are obvious. For subadditivity prove by contradiction.  Assume
+\[ d(x,y) > d(x,z) + d(y,z) \]
+
+If $x=y$, there is an immediate contradiction.  If $x\neq y$ then we must have $x=z$ and $y=z$, but then $x=y$ which is a contradiction.
+
+Therefore
+
+\[ d(x,y) \leq d(x,z) + d(y,z) \]
+
+All sets are open and closed. Let $A \subset X$  Since any ball of $e<1$ around a point, $N_r(x) \subset A$, therefore every subset of $X$ is the singleton $\{x\}$ and is open. Then $A^c = X \setminus A$ is open.  So $A$ is also closed.
+
+Since $X$ is infinite, there is no finite subcover of the open cover around each singleton point.  Hence, $X$ is not compact.
+
+\subsection{Exercise 23}
+Prove that there exists a number $x \in [0, \frac{\pi}{2}]$ such that $2x-1 =
+\sin(x^2 + \frac{\pi}{4})$.
+
+Let $f(x) = 2x - 1$, which is continuous function over $[0, \frac{\pi}{2}]$.  Observe \marginnote{The inequality easily follows since the image of $\sin(x)=[-1,1]$}.
+
+\[ f(0) = -1 \leq \sin(x^2 + \frac{\pi}{4}) < \pi - 1 = f(\frac{\pi}{2}) \]
+
+Therefore, by the Intermediate Value Theorem there exists $f(x) = \sin(x^2 + \frac{\pi}{4})$
+
+\end{document}
+\grid
