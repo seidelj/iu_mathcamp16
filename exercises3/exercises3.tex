@@ -1,0 +1,133 @@
+\documentclass{tufte-book}
+
+\usepackage{amsmath, amsthm}
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Math Camp 2016\\Exercises }
+\author{Joe Seidel}
+\date{\today}
+
+\usepackage{booktabs}
+\usepackage{units}
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+\usepackage{multicol}
+\usepackage{lipsum}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{amssymb}
+
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\DeclareMathOperator{\proj}{proj}
+\newcommand{\vct}{\mathbf}
+\newcommand{\dprod}[2]{\langle \vct{#1}, \vct{#2} \rangle}
+
+\newtheoremstyle{mytheoremstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\itshape}		% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mytheoremstyle}
+\newtheorem*{thm}{Thm.}
+
+\newtheoremstyle{mylemstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\itshape}		% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mylemstyle}
+\newtheorem*{lem}{Lem.}
+
+
+\newtheoremstyle{mydefstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\normalfont}	% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mydefstyle}
+\newtheorem*{mydef}{Def.}
+\newtheorem*{ex}{E.g.}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{gobble}
+\newpage
+\pagenumbering{arabic}
+
+\subsection{Exercise 4}
+Compute
+\[ \int_0^1 (e^x + x) dx. \]
+
+First find $F(x)$ the anti derivative of $(e^x +x)$.
+
+\[ F(t) = e^t - \frac{t^2}{2}. \]
+
+Apply the fundemental theorem of calculus
+
+\[ \int_0^1 (e^x + x) dx = F(1) - F(0) = e - \frac{1}{2}. \]
+
+\subsection{Exercise 5}
+Revisit chapter 2, exercise 3(ii).  Let
+
+\[ f(x) =
+\begin{cases}
+-\cos \frac{1}{x} + 2 \sin \frac{1}{x}, & \ 0 < x \leq 1\\
+0, & \ x=0\\
+\end{cases}
+\]
+
+Compute $\int_0^1 f(x) dx$.
+
+First, find the $F(x)$. Write
+\[ \int f(x) dx = \int 2x \sin\frac{1}{x} + \int -\cos \frac{1}{x} dx. \]
+
+Integrate $\int (-\cos \frac{1}{x}) dx$ by parts\marginnote{$\int fdg = fg - \int gdf$} where
+
+\begin{align*}
+f &= x^2\\
+dg &= -\frac{\cos \frac{1}{x}}{x^2}dx \\
+g &= \sin{\frac{1}{x}}\\
+df &= 2xdx.\\
+\end{align*}
+
+Now
+\[ \int (-\cos \frac{1}{x}) = x^2\sin \frac{1}{x} - \int 2x \sin\frac{1}{x} dx \]
+therefore
+
+\[ F(x) =
+\begin{cases}
+x^2 \sin \frac{1}{x} & 0 < x \leq 1\\
+0 & x=0\\
+\end{cases}
+\]
+
+Applying the fundemental theorem of calculus.
+
+\[ \int_0^1 f(x) dx = F(1) - F(0) = \sin 1 \]
+
+
+\end{document}
+\grid

@@ -1,0 +1,404 @@
+\documentclass{tufte-book}
+
+\usepackage{amsmath, amsthm}
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Math Camp 2016\\Exercises }
+\author{Joe Seidel}
+\date{\today}
+
+\usepackage{booktabs}
+\usepackage{units}
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+\usepackage{multicol}
+\usepackage{lipsum}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{amssymb}
+
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\DeclareMathOperator{\proj}{proj}
+\newcommand{\vct}{\mathbf}
+\newcommand{\dprod}[2]{\langle \vct{#1}, \vct{#2} \rangle}
+
+\newtheoremstyle{mytheoremstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\itshape}		% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mytheoremstyle}
+\newtheorem*{thm}{Thm.}
+
+\newtheoremstyle{mylemstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\itshape}		% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mylemstyle}
+\newtheorem*{lem}{Lem.}
+
+
+\newtheoremstyle{mydefstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\normalfont}	% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mydefstyle}
+\newtheorem*{mydef}{Def.}
+\newtheorem*{ex}{E.g.}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{gobble}
+\newpage
+\pagenumbering{arabic}
+
+\subsection{Exercise 1}
+Let
+\[ f(x) = \frac{x^2 + x + 1}{e^x} .\]
+Calculate $f'(x)$
+
+Observe
+\begin{align*}
+g(x) &= x^2 + x + 1\\
+g'(x) &= 2x + 1\\
+h(x) &= e^x\\
+h'(x) &= e^x.
+\end{align*}
+
+Then rewrite
+\[ f(x) = \big(\frac{g}{h}\big)(x). \]
+
+From which it easily follows
+\begin{align*}
+f'(x) &= \big(\frac{g}{h}\big)'(x)\\
+&= \frac{g'(x)h(x) + g(x)h'(x)}{h^2(x)}\\
+&= \frac{x-x^2}{e^x}.
+\end{align*}
+
+\subsection{Exercise 2}
+Let $f(x) = e^{ax} \sin bx$.  Calculate $f'(x)$.
+
+Write
+\begin{align*}
+g(x) &= e^x\\
+h(x) &= ax\\
+j(x) &= \sin x \\
+k(x) &= bx.
+\end{align*}
+
+Then
+
+\[ f(x) = g(h(x))\cdot j(k(x)) = L(x)M(x) = (ML)(x). \]
+and
+\[f'(x) = L'(x)M(x) + L(x)M'(x) \]
+
+Compute
+\begin{align*}
+L'(x) &= g'(h(x))h'(x) = e^{ax} \cdot a = ae^{ax}\\
+M'(x) &= j'(k(x))k'(x) = \cos bx \cdot d = b \cos bx. \\
+\end{align*}
+
+Which leads to the result
+
+\[ f'(x) = e^{ax}(a \sin bx + b \cos bx). \]
+
+\subsection{Exercise 3}
+\begin{enumerate}
+
+\item Let
+\[ f(x) =
+\begin{cases}
+x \sin \frac{1}{x} & \ x \neq 0 \\
+0 & \ x = 0\\
+\end{cases}
+\]
+
+Calculate $f'(x)$ for $x \neq 0$ and show that $f(x)$ is not differentiable at $x=0$.
+
+Write
+\begin{align*}
+g(x) &= x\\
+g'(x) &= 1\\
+h(x) &= \sin x\\
+h'(x) &= \cos x\\
+j(x) &= \frac{1}{x}\\
+j'(x) &= -\frac{1}{x^2}.
+\end{align*}
+
+Observe
+\[ f'(x) = g'(x)h(j(x)) = h'(j(x))j'(x)g(x) = \sin \frac{1}{x} - \frac{1}{x} \cos \frac{1}{x}. \]
+
+Finally, since $\frac{1}{x}$ is undefined when $x=0$, $f(x)$ is not differentialable at $0$.
+
+\item Let
+\[ f(x) =
+\begin{cases}
+x^2 \sin \frac{1}{x} & \ x \neq 0 \\
+0 & \ x = 0\\
+\end{cases}
+\]
+
+Write
+\begin{align*}
+g(x) &= x^2\\
+g'(x) &= 2x\\
+h(x) &= \sin x\\
+h'(x) &= \cos x\\
+j(x) &= \frac{1}{x}\\
+j'(x) &= -\frac{1}{x^2}.
+\end{align*}
+
+Using the same method as in part (i)
+\[f'(x) = 2x \sin \frac{1}{x} - \cos\frac{1}{x} . \]
+
+\end{enumerate}
+
+\subsection{Exercise 5}
+Prove that
+\[ \frac{b-a}{b} < \ln\frac{b}{a} < \frac{b-a}{a} \ (0<a<b).\]
+
+\begin{proof}
+First observe $\ln\frac{b}{a} = \ln(b) - \ln(a)$.  Rewriting the inequality
+
+\[ \frac{b-a}{b} < \ln(b) - \ln(a) < \frac{b-a}{a} \]
+
+and diving all the terms by $(b-a)$
+
+\[ \frac{1}{b} < \frac{\ln(b) - \ln(a)}{b-a} < \frac{1}{a}. \]
+
+From the mean value theorem
+\[ \frac{\ln(b) - \ln(a)}{b-a} = \ln'(x) = \frac{1}{x} \]
+
+for some $x \in (a,b)$. The inequality is now
+
+\[ \frac{1}{b} < \frac{1}{x} < \frac{1}{a}. \]
+
+Since $b > a \implies \frac{1}{b} < \frac{1}{a}$ the inequality holds.
+\end{proof}
+
+\subsection{Exercise 6}
+Revisit Chap.1 Exercise 15. Compute
+
+\[ \lim_{x\to 0}\frac{\sqrt{1 + x} - \sqrt{1-x} }{x}  \]
+
+using L'Hospital's rule.
+
+Write
+\[ f(x) = \sqrt{1 + x} - \sqrt{1-x} \text{ and } g(x) = x, \]
+
+then
+\[ \lim_{x \to 0} f(x) = \lim_{x \to 0} g(x) = 0 \]
+
+making this a problem a prime candidate for L'Hospital's rule, as suggested.
+
+Observe
+\[ f'(x) = \frac{1}{2\sqrt{x+1}} - \frac{1}{2\sqrt{1-x}} \]
+and
+\[ g'(x) = 1. \]
+
+Therefore
+
+\[ \lim_{x\to 0}\frac{\sqrt{1 + x} - \sqrt{1-x} }{x} = \lim_{x\to 0} \frac{f'(x)}{g'(x)} = 0 \]
+
+\subsection{Exercise 7}
+
+Prove that
+\[ \lim_{x \to \infty} \Big( 1 + \frac{1}{x} \Big)^x = e.\]
+
+\begin{proof}
+
+First
+\[ \log \Big( \big(1 + \frac{1}{x}\big)^x \Big) = x \log(1 + \frac{1}{x}). \]
+
+Write $f(x) = \log(1 + \frac{1}{x})$ and $g(x) = \frac{1}{x}$. Hence
+
+\[ \log\Big(\lim_{x \to \infty} \Big( 1 + \frac{1}{x} \Big)^x \Big) = \lim_{x \to \infty}\frac{f(x)}{g(x)}. \]
+
+Where $\lim_{x \to \infty}f(x) = \lim_{x \to \infty}g(x) = 0$, making this another PRIME candidate for L'Hospital's rule.
+
+Find
+\begin{align*}
+f'(x) &= \big(\frac{1}{1+\frac{1}{x}}\big)(-\frac{1}{x^2}) \\
+g'(x) &= -\frac{1}{x^2}. \\
+\end{align*}
+
+Therefore
+
+\[ \lim_{x \to \infty} \frac{f'(x)}{g'(x)} = \lim_{x \to \infty} \frac{1}{1 + \frac{1}{x}} = 1. \]
+
+To recap we have found
+
+\[ \log\Big(\lim_{x \to \infty} \Big( 1 + \frac{1}{x} \Big)^x \Big) = 1 \]
+
+which means
+
+\[ \lim_{x \to \infty} \Big( 1 + \frac{1}{x} \Big)^x = e.\]
+
+\end{proof}
+
+\subsection{Exercise 8}
+Let $f(x) = e^x \cos x$.  Prove that $f'' - 2f' + 2f =0$.
+
+First compute
+\begin{align*}
+f'(x) &= e^x(\cos x - \sin x) \\
+f''(x) &= -2e^x \sin x.\\
+\end{align*}
+
+Then
+\begin{align*}
+f'' - 2f' + 2f &= -2e^x \sin x - 2e^x(\cos x - \sin x) + 2e^x \cos x \\
+&= 0
+\end{align*}
+
+\subsection{Exercise 10}
+Find the Taylor polynomial of degree $n$ for $f(x) = \frac{1}{1-x}$, centered at $x=0$.
+
+Observe
+\begin{align*}
+f'(x) &= \frac{1}{(x-1)^2} = \frac{1!}{(x-1)^2} \\
+f''(x) &= \frac{2}{(1-x)^3} = \frac{2!}{(x-1)^3}\\
+f'''(x) &= \frac{6}{(1-x)^4}= \frac{3!}{(x-1)^4}\\
+f^n(x) &= \frac{n!}{(1-x)^{n+1}}
+\end{align*}
+
+Recall
+\[ f(\beta) = P(\beta) + \frac{f^{n}(x)}{n!}(\beta - \alpha)^n \]
+
+and let $f(t) = \frac{1}{1-x}$, $\alpha=0$, and $\beta = x$.
+
+Hence
+
+\[ \frac{1}{1-x} = 1 + x + x^2 + x^3 + ... + x^n + \frac{1}{(1-s)^{n+1}}x^{n+1} \]
+
+with $0 < s < x$.
+
+Since
+\[ \lim_{x \to 0} \frac{1}{(1-s)^{n+1}}x^{n+1} = 0 \]
+
+this can be rewritten \marginnote{I am not sure about the error term.}
+
+\[ \frac{1}{1-x} = 1 + x + x^2 + x^3 + ... + x^n + o(x^n) \ , \ (x \to 0). \]
+
+\subsection{Exercise 12}
+
+Let $f(x) = \cos^5 \sqrt{1 + x^2}$.  Calculate $f'(x)$.
+
+Write
+\begin{align*}
+g(x) &= x^5 \\
+h(x) &= \cos x \\
+j(x) &= \sqrt{x} \\
+k(x) &= 1+x^2\\
+\end{align*}
+
+then $f(x) = g(h(j(k(x))))$ and
+\[ f'(x) = g'(h(j(k(x))))h'(j(k(x)))j'(k(x))k'(x). \]
+
+First
+\begin{align*}
+g'(x) &= 5x^4 \\
+h(x) &= -\sin x \\
+j(x) &= \frac{1}{2x} \\
+k(x) &= 2x\\
+\end{align*}
+
+then put it all together
+
+\[ f'(x) = -\frac{5x \cos^4 \sqrt{1 + x^2} \cdot \sin \sqrt{1 + x^2}}{\sqrt{1+x^2}} \]
+
+\subsection{Exercise 13}
+
+Use the mean value theorem to prove that
+
+\[ |\sin x - \sin y| \leq |x - y| \]
+
+\begin{proof}
+
+Let $f(x) = \sin x$ which is continous over some interval $[x,y]$ and differentiable over $(x,y)$, then by the mean value theorem
+
+\[ f'(x) = \frac{f(x) - f(y)}{x-y} \]
+
+for some $x \in (x,y)$.  Taking the absolute value of both sides and noting that $|f'(x) \leq 1\|$
+
+\[ |f(x) - f(y)| = |x-y||f'(x)| \leq |x-y| \]
+
+\end{proof}
+
+\subsection{Exercise 14}
+Compute
+\[ \lim_{x \to 1} \big( \frac{1}{\ln x} - \frac{1}{x-1} \big). \]
+
+Rewrite
+
+\[ \frac{1}{\ln x} - \frac{1}{x-1} = \frac{x-1-\ln x}{\ln x (x-1)} \]
+
+where $g(x) = x - 1 - \ln x$ and $h(x) = \ln x(x-1)$.
+
+Then
+\[ \lim_{x \to 1} f(x) = \lim_{x \to 1} \frac{g(x)}{h(x)} =\frac{0}{0}. \]
+
+Observe
+\begin{align*}
+g'(x) &= 1- \frac{1}{x}\\
+h'(x) &= \frac{1}{x}(x-1) + \ln x\\
+\end{align*}
+
+also tend to $0$ as $x \to 1$.  So we can take the second derivative
+
+\begin{align*}
+g''(x) &= \frac{1}{x^2} \\
+h''(x) &= \frac{x-1}{x^2} + \frac{2}{x}.\\
+\end{align*}
+
+Then observe, by L'Hospital's rule
+
+\[ \lim_{x \to 1} f(x) = \lim_{x \to 1} \frac{g'(x)}{h'(x)} = \lim_{x \to 1} \frac{g''(x)}{h''(x)} = \frac{1}{2} \]
+
+\subsection{Exercise 15}
+Find the Taylor polynomial of degree three for $f(x) = \sin x$, centered at $x=\frac{5\pi}{6}$.
+
+Let $f(t) = \sin t$, $\alpha = \frac{5\pi}{6}$, and $\beta=x$.
+
+\begin{align*}
+f'(t) &= \cos t\\
+f''(t) &= -\sin t\\
+f^{(3)}(t) &= -\cos t\\
+\end{align*}
+
+Writing out the polynomial
+\begin{equation*}
+\sin x = \frac{\sin \alpha}{0!}(x-\frac{5\pi}{6})^0 + \frac{\cos \alpha}{1!}(x-\frac{5\pi}{6})^1 + \frac{-\sin \alpha}{2!}(x-\frac{5\pi}{6})^2 + \frac{-\cos \alpha}{3!}(x-\frac{5\pi}{6})^3
+\end{equation*}
+
+Inserting the values as defined,
+\begin{equation*}
+\sin x = \frac{1}{2} - \frac{\sqrt{3}}{2}(x-\frac{5\pi}{6}) - \frac{(x-\frac{5\pi}{6})^2}{4} + \frac{\sqrt{3}}{12}(x-\frac{5\pi}{6})^3.
+\end{equation*}
+\end{document}
+\grid

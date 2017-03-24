@@ -1,0 +1,160 @@
+\documentclass{tufte-book}
+
+\usepackage{amsmath, amsthm}
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Math Camp 2016\\Exercises }
+\author{Joe Seidel}
+\date{\today}
+
+\usepackage{booktabs}
+\usepackage{units}
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+\usepackage{multicol}
+\usepackage{lipsum}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{amssymb}
+
+
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\DeclareMathOperator{\proj}{proj}
+\newcommand{\vct}{\mathbf}
+\newcommand{\dprod}[2]{\langle \vct{#1}, \vct{#2} \rangle}
+\newcommand{\pdv}[2]{\frac{\partial #1}{\partial #2}}
+\newtheoremstyle{mytheoremstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\itshape}		% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mytheoremstyle}
+\newtheorem*{thm}{Thm.}
+
+\newtheoremstyle{mylemstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\itshape}		% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mylemstyle}
+\newtheorem*{lem}{Lem.}
+
+
+\newtheoremstyle{mydefstyle} % name
+	{\topsep}		% Space above
+	{\topsep}		% Space below
+	{\normalfont}	% Body font
+	{}			% Indent amount
+	{\bfseries}	% Theorem head font
+	{\textnormal{:}}	% Punctuation after theorem head
+	{.5em}		% Space after theorem head
+	{}			%Theorem headspec
+\theoremstyle{mydefstyle}
+\newtheorem*{mydef}{Def.}
+\newtheorem*{ex}{E.g.}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{gobble}
+\newpage
+\pagenumbering{arabic}
+
+\subsection{Exercise 3}
+Let $f(x,y) = x \ln(x^2 + y^2)$.  Calculate its partial derivatives.
+
+To find $\pdv{f}{y}$, use the chain rule, holding $x$ constant.
+
+\[ \pdv{f}{y} = x \frac{2y}{x^2 + y^2} \]
+
+To find $\pdv{f}{x}$, use the product rule and the chain rule/
+
+\[ \pdv{f}{x} = \ln(x^2+y^2) + \frac{2x^2}{x^2+y^2} \]
+
+\subsection{Exercise 4}
+Let $f(x,y,z) = (x^2 + y^2)z^2 + \sin x^2$.  Calculate it's partial derivatives.
+
+To find $\pdv{f}{x}$ use the chain rule for each terms of the sum.
+
+\[ \pdv{f}{x} = 2x(z^2 + \cos x^2) \]
+
+To find $\pdv{f}{y}$ use chain rule on $(x^2+y^2)z^2$ and notice $\sin x^2$ is constant so it becomes $0$.
+
+\[ \pdv{f}{y} = 2yz^2 \]
+
+To find $\pdv{f}{z}$ notice $\sin x^2$ and $(x^2 + y^2)$ are constants hence we
+have the form $Bz^2 + C$.
+
+\[ \pdv{f}{z} = 2z(x^2+y^2) \]
+
+\subsection{Exercise 5}
+Let $z=z(u,v)= v \ln u$, $u=x^2+y^2$ and $v= \frac{y}{x}$.  Calculate $\pdv{z}{x}$ and $\pdv{z}{y}$.
+
+Observe that $z = z(u,v) = \frac{y}{x} \ln (x^2 + y^2)$ hence
+
+\[ \pdv{z}{x} = -\frac{y \ln(x^2+y^2)}{x^2} + \frac{2y}{x^2+y^2} \]
+
+and
+
+\[ \pdv{z}{y} = \frac{1}{x}(\ln(x^2+y^2) + \frac{2y^2}{x^2+y^2}). \]
+
+\subsection{Exercise 7}
+Let $z= e^{xy} \sin(x+y)$.  Calculate $\pdv{z}{x}$ and $\pdv{z}{y}$.
+
+\[ \pdv{z}{x} = e^{xy}(y \sin(x+y) + \cos(x+y) \]
+and
+\[ \pdv{z}{y} = e^{xy}(x \sin(x+y) + \cos(x+y). \]
+
+\subsection{Exercise 8}
+Let $f(x,y) = x^2 + 2xy + y^2$.  Calculate $(\Delta f)(1,2)$.
+
+First find
+\[ (\Delta f)(x,y) = (\pdv{f}{x}, \pdv{f}{y}) = (2(x+y), 2(x+y)) \]
+then
+
+\[ (\Delta f)(1,2) = (6,6). \]
+
+\subsection{Exercise 9}
+
+Let $F(x) = (x^2+y^3, xy)$.  Calculate the Jacobian $J_F$.
+
+\[ f_1 = x^2 + y^3 \text{ and } f_2=xy \]
+
+\[ J_F =
+\begin{bmatrix}
+\pdv{f_1}{x} & \pdv{f_1}{y} \\
+\pdv{f_2}{x} & \pdv{f_2}{y} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+2x & 3y^2 \\
+y & x
+\end{bmatrix}
+\]
+
+\subsection{Exercise  11}
+Prove $(\ln x)'=\frac{1}{x}$ for $x > 0$, provided $(e^x)'=e^x$.
+
+We are given the inverse function of $\ln x$ and it's derivative.  Using the Inverse Function Theorem observe
+
+\[ (\ln x)' = \frac{1}{e^{\ln x}} = \frac{1}{x}. \]
+\end{document}
+\grid
