@@ -81,7 +81,32 @@
 \subsection{Exercise 1}
 Is the set $X=\{ (x,y) \in R^2 \ | \ xy <1 \}$ convex?
 
-Choose $\vct{x} = (a, 0)$ and $\vct{y} = (0,a)$, where $a > 1$.  Then $\vct{x}, \vct{y} \in X$, but $z = (\lambda a , (1-\lambda)a) \not\in X$.  Therefore, $X$ is not convex.
+Paul Sally Jr's definition of convex sets eliminated some ambiguity over choice of $\lambda$ in the definition provided in the math camp nots.
+
+\mydef[Convex Sets] Let $A$ be a non-empty subset of $\mathbb{R}^n$.  We say $A$ is \textit{convex} if, given any two points $\vct{p},\vct{q} \in A$, the "line segment" with endpoints $\vct{p}$ and $\vct{q}$, that is, the set
+\[ \{(1-t)\vct{p} + t\vct{q} \ | \ t\in\mathbb{R}, 0\leq t \leq 1 \} \]
+is a subset of $A$.
+
+Hence, choose $\vct{x} = (a, 0)$ and $\vct{y} = (0,a)$, where $a > 0$ and large enough.  Then $\vct{x}, \vct{y} \in X$, but $z = (\lambda a , (1-\lambda)a) \not\in X$ for some $\lambda \in [0,1]$.  Therefore, $X$ is not convex.
+
+\ex $(2,0)$ and $(0,2)$.  The point $(1,1) \in \{z\}$ but $(1,1) \not\in X$.
+
+\subsection{Exercise 3}
+
+Prove Theorem 5.
+
+Let $f$ be concave, $\lambda \in [0,1]$ and suppose $f(x) > f(y)$.
+
+\begin{align}
+f(\lambda x + (1-\lambda)y) &\geq \lambda f(x) + (1-\lambda)f(y) \\
+&\geq \lambda f(y) + (1-\lambda)f(y)\\
+&= f(y) \\
+&= \min\{f(x), f(y)\}
+\end{align}
+
+Therefore $f$ is quasi-concave.  By the the definition of concave, the inequality becomes strict when $\lambda \in (0,1)$, hence also stricltly quasi-concave.
+
+A similar proof follows for convex implies quasi-convex.  Flip the inequality in $(2)$ and $(3)$ and choose $f(y)>f(x)$, e.g $f(y) = \max\{f(x),f(y)\$.
 
 \end{document}
 \grid
